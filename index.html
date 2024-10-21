@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhytoProfile</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+            font-family: Arial, sans-serif; /* Set a default font */
+        }
+
+        h1 ,h2{
+            text-align: center;
+            font-family : Garamond;
+        }
+
+
+        p{
+        margin-left:50px;
+        margin-right:50px;
+        font-size : 10px
+        margin-top : 10px;
+        }
+
+        .container {
+    background-color: black; /* Transparent box */
+    padding: 20px;
+    border-radius: 10px;
+
+    width: 50%; /* Use a responsive width */
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    align-items: center; /* Center items */
+    margin: 20px 20px; /* Space between sections */
+    border: 2px solid white; /* Add white border */
+}
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column; /* Stack inputs vertically */
+            margin: 10px 10px; /* Space between form groups */
+            width: 60%; /* Take full width */
+
+        }
+
+        label {
+             margin: 20px 0 5px;
+            margin-top : 50px ;/* Space between label and input */
+        }
+
+           input[type="number"] {
+            padding: 10px;
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter background */
+            color: white;
+            width: 100%; /* Full width */
+            margin-top: 15px; /* Increased margin above input for spacing */
+             border: 2px solid white;
+        }
+
+label {
+    margin: 10px 0; /* Space on top and bottom */
+    margin-bottom: 15px; /* Space specifically below the label */
+}
+
+
+        button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Space above button */
+            width: 106%; /* Full width */
+            transition: background-color 0.3s; /* Smooth transition */
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .btn-classify {
+            background-color: #ff5733;
+             color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 40px; /* Space above button */
+            width: 106%; /* Full width */
+            transition: background-color 0.3s; /* Smooth transition */
+             /* Distinct color for Classify button */
+        }
+
+
+
+       .results {
+    background-color: black; /* Slightly transparent background */
+    border: 2px solid white; /* White border */
+    padding: 20px; /* Padding inside the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    width: 60%; /* Adjust width */
+    margin: 20px 0; /* Space above and below */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+}
+
+.evaluation-list {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.evaluation-list li {
+    background-color: black; /* Background for list items */
+    margin: 5px 0; /* Space between list items */
+    padding: 10px; /* Padding inside list items */
+    border-radius: 5px; /* Rounded corners for list items */
+    width: 100%; /* Full width for list items */
+    border: 2px solid white;
+}
+
+.result-item, .conclusion {
+    font-size: 1.2em; /* Larger font size */
+    margin: 10px 0; /* Space above and below */
+    text-align: center; /* Center text */
+}
+
+
+
+        img {
+            width: 30%;
+            margin-top: 20px;
+            border-radius: 10px; /* Rounded corners for image */
+            margin-bottom: 20px; /* Space below image */
+            border: 2px solid white;
+        }
+    </style>
+    <script>
+        // Function to auto-fill form fields with generated values
+        function fillFormWithGeneratedValues(generatedValues) {
+            document.getElementById('pH').value = generatedValues[0];
+            document.getElementById('soil_ec').value = generatedValues[1];
+            document.getElementById('phosphorus').value = generatedValues[2];
+            document.getElementById('potassium').value = generatedValues[3];
+            document.getElementById('urea').value = generatedValues[4];
+            document.getElementById('tsp').value = generatedValues[5];
+            document.getElementById('mop').value = generatedValues[6];
+            document.getElementById('moisture').value = generatedValues[7];
+            document.getElementById('temperature').value = generatedValues[8];
+        }
+    </script>
+</head>
+<body>
+    <h1>PhytoProfile: The Science of Soil for Healthy Plants</h1>
+
+    <!-- Add your image here -->
+    <img src="static/soil.jpeg" alt="Project Image">
+
+   <p style = "text-align : center;">The PhytoProfile project leverages Generative Adversarial Networks (GANs) to create detailed soil profiles, enhancing agricultural practices through advanced data analysis. By utilizing a machine learning approach, this web-based application allows users to input essential soil parameters such as pH, electrical conductivity, and nutrient content. The GAN model generates synthetic soil profiles that mimic real-world conditions, providing users with diverse scenarios for evaluation. This innovative tool not only assesses soil health and suitability for various crops but also delivers tailored recommendations for optimized farming practices. The user-friendly interface caters to individuals with varying technical expertise, ensuring accessibility for farmers and agricultural specialists. By integrating cutting-edge technology with practical application, PhytoProfile aims to promote sustainable farming, improve crop yields, and ultimately contribute to healthier plants and enhanced agricultural productivity. Through the intelligent generation of soil data, the project paves the way for informed decision-making in modern agriculture.</p>
+    <div class="container">
+        <div class="form-group">
+            <h2>Classify and Evaluate</h2>
+            <form method="POST" action="/classify">
+                <label for="pH">pH:</label>
+                <input type="number" step="any" name="pH" id="pH" required>
+                <label for="soil_ec">Soil EC:</label>
+                <input type="number" step="any" name="soil_ec" id="soil_ec" required>
+                <label for="phosphorus">Phosphorus:</label>
+                <input type="number" step="any" name="phosphorus" id="phosphorus" required>
+                <label for="potassium">Potassium:</label>
+                <input type="number" step="any" name="potassium" id="potassium" required>
+                <label for="urea">Urea:</label>
+                <input type="number" step="any" name="urea" id="urea" required>
+                <label for="tsp">T.S.P:</label>
+                <input type="number" step="any" name="tsp" id="tsp" required>
+                <label for="mop">M.O.P:</label>
+                <input type="number" step="any" name="mop" id="mop" required>
+                <label for="moisture">Moisture:</label>
+                <input type="number" step="any" name="moisture" id="moisture" required>
+                <label for="temperature">Temperature:</label>
+                <input type="number" step="any" name="temperature" id="temperature" required>
+                <input type="submit" value="Classify and Evaluate" class="btn-classify">
+            </form>
+        </div>
+
+        <div class="form-group">
+            <h2>Generate New Profile</h2>
+            <form method="POST" action="/generate" id="generateForm">
+                <button type="submit">Generate Profile</button>
+            </form>
+            <h2>Click this button to generate a new soil profile.</h2>
+        </div>
+    </div>
+
+    {% if generated_values %}
+    <script>
+        // If generated values exist, fill the form with them
+        fillFormWithGeneratedValues({{ generated_values | safe }});
+    </script>
+    {% endif %}
+
+    <!-- Add this inside your existing <body> tag -->
+<h1>Results</h1>
+<div class="results">
+    {% if plant_type %}
+    <p class="result-item">The Recommended Plant Type : <strong>{{ plant_type }}</strong></p>
+    {% endif %}
+</div>
+
+<div class="results">
+    {% if evaluation and conclusion %}
+    <ol class="evaluation-list">
+        {% for key, value in evaluation.items() %}
+        <li><strong>{{ key }} : </strong> {{ value }}</li>
+        {% endfor %}
+    </ol>
+    <p class="conclusion"><b>Conclusion: </b>{{ conclusion }}</p>
+    {% endif %}
+</div>
+
+{% if error %}
+<p style="color:red">{{ error }}</p>
+{% endif %}
+
+</body>
+</html>
